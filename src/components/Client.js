@@ -16,6 +16,7 @@ import {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        padding: "0 2rem",
         [theme.breakpoints.down('sm')]: {
             width: "60vw",
             flexDirection: "column",

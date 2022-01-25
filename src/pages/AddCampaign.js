@@ -1,9 +1,26 @@
 import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 
+import { makeStyles } from '@mui/styles';
+
 import CampaignContext from '../store/CampaignStore';
 
+const useStyles = makeStyles((theme) => ({
+    btnholder: {
+        display:"flex",
+        flexDirection:"row",
+        marginLeft:"1rem",
+        marginTop:"1rem",
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center",
+            marginRight: "4rem"
+        }
+    }
+}))
+
 const AddCampaign = () =>{
+    const classes = useStyles();
+
     const [nameValue, setNameValue] = useState('');
     const [codeValue, setCodeValue] = useState('');
     const [countryValue, setCountryValue] = useState('');
@@ -50,12 +67,12 @@ const AddCampaign = () =>{
 
             </div>  
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem"}}>
-                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}>       
+            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem", justifyContent: "flex-start"}}>
+                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row", marginRight: "4rem"}}>       
                 <label style ={{marginTop:"0.5rem",color:"#1E75B7"}}>Name </label>
                 </div>
 
-            <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div>
+            {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
@@ -64,12 +81,12 @@ const AddCampaign = () =>{
             </div>
 
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem"}}>
-                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}>       
+            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem", justifyContent: "flex-start"}}>
+                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row", marginRight: "4rem"}}>       
                 <label style ={{marginTop:"0.5rem",color:"#1E75B7"}}>Code  </label>
                 </div>
 
-            <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div>
+            {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
@@ -77,12 +94,12 @@ const AddCampaign = () =>{
                 </div>
             </div>
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem"}}>
-                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}>       
+            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem", justifyContent: "flex-start"}}>
+                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row", marginRight: "4rem"}}>       
                 <label style ={{marginTop:"0.5rem",color:"#1E75B7"}}>Country </label>
                 </div>
 
-            <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div>
+            {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
@@ -90,12 +107,12 @@ const AddCampaign = () =>{
                 </div>
             </div>
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem"}}>
-                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}>       
+            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem", justifyContent: "flex-start"}}>
+                <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row", marginRight: "4rem"}}>       
                 <label style ={{marginTop:"0.5rem",color:"#1E75B7"}}>Image </label>
                 </div>
 
-            <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div>
+            {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
@@ -106,7 +123,8 @@ const AddCampaign = () =>{
 
             <br></br>
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row",marginLeft:"1rem",marginTop:"1rem"}}>
+            <div className="form-row" style={{ marginLeft: "0.5rem", marginTop: "0.5rem"}}>
+            <div className={classes.btnholder}>
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>       
                 
                 </div>
@@ -117,7 +135,7 @@ const AddCampaign = () =>{
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-success" onClick={createCampaign}> &nbsp;Create</button>
                 </div>
-
+                </div>
             </div>
 
         

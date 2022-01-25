@@ -15,7 +15,7 @@ const Header = () => {
                     
                     <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/" exact={true}> Clients</NavLink>
                     <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/operator" exact={true}>  Operators </NavLink>
-                    <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/campaign" exact={true}>Compaigns</NavLink>
+                    <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/campaign" exact={true}>Campaigns</NavLink>
                     <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/Subscription" exact={true}>Subscription</NavLink>
                     <NavLink className="navbar-brand nav-item nav-link" style={{color: 'white'}} activeClassName="selected" to="/Transaction" exact={true}>Transaction</NavLink>
                 {/* </div>
