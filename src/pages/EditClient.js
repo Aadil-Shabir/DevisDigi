@@ -169,8 +169,8 @@ const EditClient = () => {
     useEffect(() => {
         axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
         .then((res) => {
-            setPackageData(res.data.payload.packages[0] ? {package_id: res.data.payload.packages[0].id, name: res.data.payload.packages[0].name, price: res.data.payload.packages[0].price, recurrence_days: res.data.payload.packages[0].recurrence_days, operator_id: "", client_id: ""} : res.data.payload.packages)
-            setPackageData({...packageData, operator_id: operator_id, client_id: res.data.payload.client.pk})
+            setPackageData(res.data.payload.packages[0] ? {package_id: res.data.payload.packages[0].id, name: res.data.payload.packages[0].name, price: res.data.payload.packages[0].price, recurrence_days: res.data.payload.packages[0].recurrence_days, operator_id: operator_id, client_id: res.data.payload.client.pk} : res.data.payload.packages)
+            // setPackageData({...packageData, operator_id: operator_id, client_id: res.data.payload.client.pk})
             
         })
     }, [provider_id])
