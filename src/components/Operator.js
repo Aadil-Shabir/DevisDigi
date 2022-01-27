@@ -22,6 +22,7 @@ import {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        padding: "0 2rem",
         [theme.breakpoints.down('sm')]: {
             width: "60vw",
             flexDirection: "column",
@@ -196,7 +197,7 @@ return (
             <div class="col-2 minimizer" style={{display: "flex"}}>
             <div class="vertical-nav bg-white" id="sidebar">
                 <ul class="nav flex-column mb-0">
-                <li class="nav-item sidebar"><Link to="/Operator" class="nav-link text-dark font-italic"><i class="bi bi-list-ul sidebar-logo"></i> &nbsp; &nbsp; All Operators</Link></li>
+                <li class="nav-item sidebar"><Link to="/Operator" class="nav-link font-italic"  style={{color: 'white'}}><i class="bi bi-list-ul sidebar-logo"></i> &nbsp; &nbsp; All Operators</Link></li>
                 </ul>
             </div>
             </div>
