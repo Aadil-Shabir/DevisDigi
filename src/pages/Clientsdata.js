@@ -2,6 +2,7 @@ import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from '@mui/styles';
@@ -17,9 +18,8 @@ import {
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
         width: 1261,
-        height: 380,
-        marginTop: "2rem",
-        // display: "none",
+        height: 360,
+        marginTop: "2.5rem",
         [theme.breakpoints.down('xl')]: {
           width: 1100
       },
@@ -50,11 +50,12 @@ const Clientsdata = () => {
       headerName: "ID",
       field: "id",
       checkboxSelection:true,
-      maxWidth: 50
+      maxWidth: 50,
     },
     {
       headerName: "Key",
       field: "client_token",
+      
     },
     {
       headerName: "Operator - Provider",
@@ -135,7 +136,7 @@ const Clientsdata = () => {
                             
 
                         <AgGridColumn field="id" sortable={true} filter={true} checkboxSelection={true}></AgGridColumn>
-                        <AgGridColumn field="client_token" sortable={true} filter={true} ></AgGridColumn>
+                        <AgGridColumn field="client_token" sortable={true} filter={true} cellStyle={{color: 'red'}}></AgGridColumn>
                         
                         <AgGridColumn field="name" sortable={true} filter={true}></AgGridColumn>
                         <AgGridColumn field="referrer_link" sortable={true} filter={true}></AgGridColumn>

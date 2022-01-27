@@ -52,7 +52,7 @@ import {
         marginLeft: "2%",
         [theme.breakpoints.down('sm')]: {
             width: "12rem",
-            marginLeft: "2rem",
+            marginLeft: "1rem",
             padding: "0",
             margin: "0",
             alignItems: "center"
@@ -61,9 +61,8 @@ import {
     gridBox: {
         background:"white",
         marginTop:"2%",
-        marginLeft:"3%", 
         height:"25rem",
-        width:"79.5vw",
+        width:"82vw",
         display:"flex",
         flexDirection:"row",
         justifyContent: "center",
@@ -85,8 +84,9 @@ import {
         // alignItems: "center"
     },
     dataContainer: {
-        width: 1222,
-        height: 400,
+        width: 1261,
+        height: 360,
+        marginTop: "2.5rem",
         [theme.breakpoints.down('xl')]: {
             width: 1100
         },
@@ -230,7 +230,7 @@ return (
                  return '[' + params.value.toLocaleString() + ']';
                }}>
                <AgGridColumn field="id" sortable={true} filter={true} checkboxSelection={true}></AgGridColumn>
-               <AgGridColumn field="name" sortable={true} filter={true}></AgGridColumn>
+               <AgGridColumn field="name" sortable={true} filter={true} ></AgGridColumn>
                <AgGridColumn field="country" sortable={true} filter={true}></AgGridColumn>
                <AgGridColumn field="code" sortable={true} filter={true}></AgGridColumn>
                
