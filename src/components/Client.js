@@ -54,10 +54,9 @@ import {
     },
     gridBox: {
         background:"white",
-        marginTop:"2%",
-        marginLeft:"3%", 
+        marginTop:"2%", 
         height:"25rem",
-        width:"79.5vw",
+        width:"82vw",
         display:"flex",
         flexDirection:"row",
         justifyContent: "center",

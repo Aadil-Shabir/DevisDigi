@@ -16,8 +16,10 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
-        width: 1222,
-        height: 400,
+        width: 1261,
+        height: 380,
+        marginTop: "2rem",
+        // display: "none",
         [theme.breakpoints.down('xl')]: {
           width: 1100
       },
