@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
         background:"white",
         marginTop:"2%",
         marginLeft:"1%",
-        height:"40rem",
-        width:"84rem",
+        height:"50rem",
+        width:"80rem",
         display:"flex",
         flexDirection:"row",
         [theme.breakpoints.down("lg")]: {
