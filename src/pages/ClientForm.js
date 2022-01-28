@@ -42,7 +42,18 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "25px",
         fontWeight:"bold",
         color:"#03A9F4"
-    },  
+    },
+    scrollOpts: {
+        width: '1100px',
+        height: '1000px',
+        [theme.breakpoints.down('md')]: {
+            width: '500px',
+            height: '100vh'
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '300px'
+        }
+    }  
 }))
 
 const ClientForm  = (props) => {
@@ -50,8 +61,8 @@ const ClientForm  = (props) => {
 
     
     return (<div>
-        <form>
-        <Scrollbars style={{width: 1100, height: 1000}}>
+        <form className={classes.scrollOpts}>
+        <Scrollbars>
         
 
     <div className={classes.formContentHolder}>

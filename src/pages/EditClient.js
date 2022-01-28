@@ -16,15 +16,15 @@ const useStyles = makeStyles((theme) => ({
         display:"flex",
         flexDirection:"row",
         [theme.breakpoints.down("lg")]: {
-            height: "140%",
+            height: "160%",
             width: "100vw",
-          justifyContent: "center"
+          justifyContent: "center",
+          
         }
     },
     formHolder: {
         marginLeft:"3%" ,
         marginTop:"2%",
-        // margin: "4rem"
     },
     createClientHeaderContainer: {
         background:"white",
