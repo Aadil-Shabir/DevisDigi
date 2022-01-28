@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Scrollbars} from "react-custom-scrollbars";
+
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,8 +50,8 @@ const ClientForm  = (props) => {
 
     
     return (<div>
-        
         <form>
+        <Scrollbars style={{width: 1100, height: 1000}}>
         
 
     <div className={classes.formContentHolder}>
@@ -191,6 +193,7 @@ const ClientForm  = (props) => {
     </div>
         
        
+      </Scrollbars>
       </form>
 
 
