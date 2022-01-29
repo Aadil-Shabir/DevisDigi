@@ -11,7 +11,7 @@ import axios from 'axios'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const useStyles =  makeStyles((theme) => ({
     campaignBox: {
@@ -102,6 +102,7 @@ const useStyles =  makeStyles((theme) => ({
 
 const Campaign = () => {
     const classes = useStyles();
+    const history = useHistory();
     const camCtx = useContext(CampaignContext);
 
 const [overlay, setOverlay] = useState(false)
@@ -169,12 +170,10 @@ useEffect(() => {
 
     const rowClickHandler = (e) => {
         console.log(e);
-        camCtx.openModalWithData(e);
+        history.push({pathname: `/campaign/EditCampaign/${e.data.id}`, state: { detail: e.data.id}})
     }
 
 return (
-    
-
     <div className="clientbg">
         <div className="row">
         

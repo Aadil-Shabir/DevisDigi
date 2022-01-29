@@ -1,4 +1,8 @@
-import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+
+import axios from "axios";
+
+import {Link, useParams} from "react-router-dom";
 
 import {makeStyles} from "@mui/styles";
 
@@ -16,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       height: "10rem",
-      marginLeft: "2rem"
+      marginLeft: "3rem"
     }
   },
   campaignLink: {
@@ -57,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       height: "10rem",
-      marginLeft: "2rem"
+      marginLeft: "3rem"
     }
   },
   campaignIDParagraph: {
@@ -81,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       height: "18rem",
-      marginLeft: "2rem"
+      marginLeft: "3rem"
     }
   },
   OCPCHeaders: {
@@ -114,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
       width: "60vw",
       justifyContent: "center",
       alignItems: "center",
-      marginLeft: "2rem"
+      marginLeft: "3rem"
     }
     
   },
@@ -144,7 +148,26 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const EditCampaign = () => {
+  const campaignId = useParams();
   const classes = useStyles();
+  const [cData, setCData] = useState({
+    company: "",
+    conversion: "",
+    id: "",
+    operator: "",
+    payout: "",
+    public_id: ""
+  })
+
+  useEffect(() => {
+    axios.get(`https://dev.digitalizehub.com/api/admin/campaigns/${campaignId.campaignid}`)
+    .then((res) => {
+      const data = res.data.payload.campaign
+      setCData(data);
+    })
+  }, [])
+
+  console.log(cData)
 
   return (
     <div className="clientbg">
@@ -171,15 +194,14 @@ const EditCampaign = () => {
 
             <div style={{ display: "flex", flexDirection: "row" }}>
               <p className={classes.titleParagraph} >
-                <i class="bi bi-arrow-left"></i> &nbsp;&nbsp; NTH_ZAINIRAQ -
-                ADSTART
+                <i class="bi bi-arrow-left"></i> &nbsp;&nbsp; {cData.operator}
               </p>
             </div>
           </div>
 
           <div className={classes.campaignIDDiv}>
             <p className={classes.campaignIDParagraph}>
-              Campaign ID. 91bf7440-3437-4ed7-b0db-923f240f8a26
+              Campaign ID. {cData.public_id}
             </p>
           </div>
 
@@ -189,7 +211,7 @@ const EditCampaign = () => {
                 Operator
               </p>
               <p className={classes.OCPCValues}>
-                Random
+                {cData.operator}
               </p>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -197,7 +219,7 @@ const EditCampaign = () => {
                 Company
               </p>
               <p className={classes.OCPCValues}>
-                Random
+                {cData.company}
               </p>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -205,7 +227,7 @@ const EditCampaign = () => {
                 Payout
               </p>
               <p className={classes.OCPCValues}>
-                100
+                {cData.payout}
               </p>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -213,7 +235,7 @@ const EditCampaign = () => {
                 Conversion
               </p>
               <p className={classes.OCPCValues}>
-                1.100
+                {cData.conversion}
               </p>
             </div>
             

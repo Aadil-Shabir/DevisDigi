@@ -52,7 +52,7 @@ function App() {
             
             <Route exact path="/EditClient/:clientid" component={EditClient} />
             <Route exact path="/operator/AddOperator" component={AddOperator} />
-            <Route exact path="/campaign/EditCampaign" component={EditCampaign} />
+            <Route exact path="/campaign/EditCampaign/:campaignid" component={EditCampaign} />
    
     </Switch>
 
