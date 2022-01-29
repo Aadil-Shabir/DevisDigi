@@ -4,6 +4,8 @@ import axios from "axios";
 
 import {Link, useParams} from "react-router-dom";
 
+import { Scrollbars} from "react-custom-scrollbars";
+
 import {makeStyles} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -114,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "0.4rem",
     height: "40rem",
     width: "80rem",
+    display: "flex",
     [theme.breakpoints.down("md")]: {
       width: "60vw",
       justifyContent: "center",
@@ -144,7 +147,18 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       margin: "0.5rem"
     }
-  }
+  },
+  scrollOpts: {
+    width: '1100px',
+    height: '1000px',
+    [theme.breakpoints.down('md')]: {
+        width: '500px',
+        height: '100vh'
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '300px'
+    }
+} 
 }))
 
 const EditCampaign = () => {
@@ -186,6 +200,8 @@ const EditCampaign = () => {
         </div>
 
         <div class="col-10" style={{padding: "0rem"}}>
+          {/* <div classNAme={classes.scrollOpts}> */}
+          <Scrollbars style={{width: "1300px", height: "800px"}}>
           <div className={classes.campaignDiv}>
             <p className={classes.campaignLink}>
               <Link to="/campaign" style={{color: "gray"}}> Campaign </Link>
@@ -321,7 +337,8 @@ const EditCampaign = () => {
         </div>
  
           </div>
-         
+            </Scrollbars>
+            {/* </div> */}
         </div>
 
       </div>
