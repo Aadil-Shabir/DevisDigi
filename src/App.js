@@ -39,7 +39,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <Router history={history}>
-    <div className="App">
+    <div className="App" style={{background: "white"}}>
       
   <Header></Header>
   <Switch>
