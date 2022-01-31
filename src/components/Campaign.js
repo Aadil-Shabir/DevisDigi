@@ -87,6 +87,9 @@ const useStyles =  makeStyles((theme) => ({
         width: 1261,
         height: 360,
         marginTop: "2.5rem",
+        [theme.breakpoints.down('xxl')]: {
+            width: 1140
+          },
         [theme.breakpoints.down('xl')]: {
             width: 1100
         },
