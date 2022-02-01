@@ -23,7 +23,7 @@ import {
             justifyContent: "center",
             alignItems: "center",
             height: "8rem",
-            marginLeft: "3rem"
+            marginLeft: "2rem"
         },
         [theme.breakpoints.down('sx')]: {
             marginLeft: "5rem"
