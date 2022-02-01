@@ -1,9 +1,9 @@
-import React from 'react'
-import Clientsdata from '../pages/Clientsdata'
-
+import React, {useContext} from 'react'
 import { makeStyles } from '@mui/styles'
-
 import { Link } from 'react-router-dom'
+
+import ClientContext from '../store/ClientStore'
+import Clientsdata from '../pages/Clientsdata'
 
 const useStyles = makeStyles((theme) => ({
     clientBox: {
@@ -78,7 +78,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Client = () => {
-    const classes = useStyles()
+    const classes = useStyles();
+    const clCtx = useContext(ClientContext);
 
     return (
         <div className="clientbg">
@@ -113,7 +114,7 @@ const Client = () => {
                     <div className={classes.clientBox}>
                         <p className={classes.clientText}> Clients</p>
                         <div className={classes.newClientBtn}>
-                            <Link className="btn btn-default" to="/AddClient">
+                            <Link className="btn btn-default" to="/AddClient" onClick={clCtx.conditionFalser}>
                                 <i class="bi bi-plus-square"></i>&nbsp;Add new
                                 client
                             </Link>
