@@ -245,6 +245,9 @@ const AddClient = () => {
                                 sdata={sdata}
                                 operator={operator}
                                 packageData={packageData}
+                                setData={setdata}
+                                setPackageData={setPackageData}
+                                setOperator={setOperator}
                             />
                         </div>
                     </div>

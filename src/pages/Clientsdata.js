@@ -1,17 +1,15 @@
-import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import { useEffect, useState, useRef, useContext } from 'react';
 
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import { useHistory } from "react-router-dom";
-
 import { makeStyles } from '@mui/styles';
-
 import axios from 'axios'
 
-import {Link} from "react-router-dom";
+import ClientContext from '../store/ClientStore';
 
- import { useEffect, useState, useRef } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
@@ -40,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Clientsdata = () => {
     let history = useHistory();
+    const clCtx = useContext(ClientContext)
     const classes = useStyles();
    
   const [rowData, setRowData] = useState([]);
@@ -101,7 +100,7 @@ const Clientsdata = () => {
 }, [])
 
    const handleRowClick = (e) => {
-       console.log(e);
+       clCtx.conditionTruer();
     history.push({pathname: `/EditClient/${e.data.id}`,state: { detail: e.data.id }});
   };
    return (

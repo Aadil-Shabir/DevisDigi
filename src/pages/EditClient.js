@@ -75,7 +75,6 @@ const EditClient = () => {
     const [operator_id, setOperator_id] = useState(0)
     const [provider_id, setProvider_id] = useState(0)
     const [operator, setOperator] = useState('')
-    // const [provider, setProvider] = useState("");
 
     const clientid = useParams()
     const [sdata, setdata] = useState({
@@ -290,6 +289,9 @@ const EditClient = () => {
                                         sdata={sdata}
                                         operator={operator}
                                         packageData={packageData}
+                                        setData={setdata}
+                                        setPackageData={setPackageData}
+                                        setOperator={setOperator}
                                     />
                                 </div>
                             </div>
