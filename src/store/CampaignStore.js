@@ -6,13 +6,15 @@ const CampaignContext = React.createContext({
     closeModal: () => {},
     openModalWithData: () => {},
     value: {name: '', code: '', country: '', image: ''},
-    validator: false
+    validator: false,
+    FWD: false,
 })
 
 export const CampaignContextProvider = (props) => {
     const [overlay, setOverlay] = useState(false);
     const [value, setValue] = useState({name: '', code: '', country: '', image: ''});
     const [validator, setValidator] = useState(false);
+    const [formWithData, setFormWithData] = useState(false);
 
     const openModalHandler = () => {
         setOverlay(true);
@@ -32,6 +34,7 @@ export const CampaignContextProvider = (props) => {
         )
 
         setValidator(false);
+        setFormWithData(false);
 
     };
 
@@ -61,7 +64,8 @@ export const CampaignContextProvider = (props) => {
             closeModal: closeModalHandler,
             openModalWithData: openModalWithDataHandler,
             value: value,
-            validator: validator
+            validator: validator,
+            FWD: formWithData
         }}>
             {props.children}
         </CampaignContext.Provider>
