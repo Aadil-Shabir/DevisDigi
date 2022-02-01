@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const AddOperator = () => {
     const classes = useStyles()
 
+    const [countries, setCountries] = useState([])
     const [nameValue, setNameValue] = useState('')
     const [codeValue, setCodeValue] = useState('')
     const [countryValue, setCountryValue] = useState('')
@@ -39,6 +40,14 @@ const AddOperator = () => {
         opCtx.value.country,
         opCtx.value.image,
     ])
+
+    useEffect(() => {
+        axios.get("https://dev.digitalizehub.com/api/admin/operators")
+        .then((res) => {
+            const all_countries = res.data.payload.all_operators.map((c) => c.country);
+            setCountries(all_countries)
+        })
+    }, [])
 
     const createOperator = () => {
         const config = {
@@ -200,14 +209,19 @@ const AddOperator = () => {
                     className="form-group col-md-6"
                     style={{ display: 'flex', flexDirection: 'row' }}
                 >
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputEmail4"
-                        placeholder=""
-                        onChange={(e) => setCountryValue(e.target.value)}
-                        value={countryValue}
-                    />
+                    {opCtx.FWD ? (
+                        <select class="form-control" value={countryValue} onChange={(e) =>  setCountryValue(e.target.value)}>
+                            <option>
+                                {countryValue}
+                            </option>
+                            {countries.map((c) => <option key={Math.random()}>{c}</option>)}
+                        </select>
+                    ) : 
+                        <select class="form-control" value={countryValue || ""} onChange={(e) =>  setCountryValue(e.target.value)}>
+                            <option>Choose..</option>
+                            {countries.map((c) => <option key={Math.random()}>{c}</option>)}
+                        </select>
+                        }
                 </div>
             </div>
 

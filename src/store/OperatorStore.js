@@ -6,13 +6,15 @@ const OperatorContext = React.createContext({
     closeModal: () => {},
     openModalWithData: (e) => {},
     value: {name: '', code: '', country: '', image: ''},
-    validator: false
+    validator: false,
+    FWD: false
 });
 
 export const OperatorContextProvider = (props) => {
     const [overlay, setOverlay] = useState(false);
     const [value, setValue] = useState({name: '', code: '', country: '', image: ''})
     const [validator, setValidator] = useState(false);
+    const [formWithData, setFormWithData] = useState(false);
     
     const openModalHandler = () => {
         setOverlay(true);
@@ -32,11 +34,13 @@ export const OperatorContextProvider = (props) => {
         )
 
         setValidator(false);
+        setFormWithData(false);
 
     };
 
     const openModalWithDataHandler = (e) => {
        
+        setFormWithData(true);
         setOverlay(true);
         setValue(
             {
@@ -60,7 +64,8 @@ export const OperatorContextProvider = (props) => {
                 closeModal: closeModalHandler,
                 openModalWithData: openModalWithDataHandler,
                 value: value,
-                validator: validator
+                validator: validator,
+                FWD: formWithData
             }
         }
             >

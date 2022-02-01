@@ -173,7 +173,6 @@ useEffect(() => {
         .then(res => {
             setLoading(false)
             setRowData(res.data.payload.all_operators)
-            console.log(rowData)
         })
     } catch (error) {
         console.log(error)
@@ -181,7 +180,6 @@ useEffect(() => {
 }, [])
 
     const rowClickHandler = (e) => {
-        console.log(e)
         opCtx.openModalWithData(e)
     }
 
