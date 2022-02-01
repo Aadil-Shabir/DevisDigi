@@ -74,6 +74,8 @@ const AddOperator = () => {
         } catch (error) {
             console.log(error)
         }
+
+        opCtx.closeModal()
     }
 
     return (
