@@ -162,8 +162,6 @@ const Operator = () => {
               params.api.sizeColumnsToFit();
             });
           });
-      
-      
       };
 
 useEffect(() => {
@@ -249,7 +247,7 @@ return (
         {opCtx.overlay ? (
                         <div className="overlay modal-container">
                 <div className="overlay-sidebar" id="myModal2">
-                    <AddOperator></AddOperator>
+                    <AddOperator setRowData={setRowData} rowData={rowData}></AddOperator>
                     </div>
                
                 

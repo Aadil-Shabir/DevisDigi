@@ -18,14 +18,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const AddOperator = () => {
-    const classes = useStyles()
+const AddOperator = (props) => {
+    const classes = useStyles();
 
     const [countries, setCountries] = useState([])
     const [nameValue, setNameValue] = useState('')
     const [codeValue, setCodeValue] = useState('')
     const [countryValue, setCountryValue] = useState('')
     const [imageValue, setImageValue] = useState('')
+    const [targetCountry, setTargetCountry] = useState(0)
+    const [operatorIdValue, setoperatorIdValue] = useState(0)
+    const [cont, setCont] = useState("");
 
     const opCtx = useContext(OperatorContext)
 
@@ -34,39 +37,54 @@ const AddOperator = () => {
         setCodeValue(opCtx.value.code)
         setCountryValue(opCtx.value.country)
         setImageValue(opCtx.value.image)
+        setoperatorIdValue(opCtx.value.id)
     }, [
         opCtx.value.name,
         opCtx.value.code,
         opCtx.value.country,
         opCtx.value.image,
+        opCtx.value.id
     ])
 
     useEffect(() => {
-        axios.get("https://dev.digitalizehub.com/api/admin/operators")
+        axios.get("https://dev.digitalizehub.com/api/admin/operators/1")
         .then((res) => {
-            const all_countries = res.data.payload.all_operators.map((c) => c.country);
-            setCountries(all_countries)
+            const all_countries = res.data.payload.all_countries.map((c) => c.name);
+            setCountries(all_countries);
+            const targetC = res.data.payload.all_countries.find((c) => c.name === countryValue);
+            setTargetCountry(targetC.id)
+            setCont(targetC.name);
+
         })
-    }, [])
+    }, [countryValue]);
 
     const createOperator = () => {
+        console.log(nameValue, targetCountry, codeValue)
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         }
 
+        const formdata = new FormData();
+        opCtx.validator && formdata.append("operator_id", operatorIdValue) 
+        formdata.append("name", nameValue);
+        formdata.append("code", codeValue);
+        formdata.append("country_id", targetCountry)
+
+
         try {
             axios
                 .post(
-                    'https://dev.digitalizehub.com/api/admin/operators',
-                    {
-                        operator_id: '25',
-                        name: nameValue,
-                        code: codeValue,
-                        country_id: countryValue,
-                    },
+                    'http://dev.digitalizehub.com/api/admin/operator',
+                   formdata,
                     config
+                  
                 )
                 .then((response) => {
                     console.log(response)
@@ -75,8 +93,12 @@ const AddOperator = () => {
             console.log(error)
         }
 
-        opCtx.closeModal()
+        opCtx.closeModal();
+        props.setRowData(prevState => prevState.map(row => row.id === operatorIdValue ? {country: cont, id: operatorIdValue, name: nameValue, code: codeValue} : row))
+
     }
+
+    console.log(targetCountry)
 
     return (
         <div className="row" data-keyboard="false" data-backdrop="static">
@@ -101,7 +123,7 @@ const AddOperator = () => {
                     Operator
                 </p>
             </div>
-
+                <form onSubmit={submitHandler}>
             <div
                 className="form-row"
                 style={{
@@ -266,6 +288,7 @@ const AddOperator = () => {
                     />
                 </div>
             </div>
+            
 
             <br></br>
 
@@ -291,7 +314,6 @@ const AddOperator = () => {
                         </button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button
-                            type="button"
                             class="btn btn-success"
                             onClick={createOperator}
                         >
@@ -300,6 +322,7 @@ const AddOperator = () => {
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     )
 }
