@@ -101,7 +101,8 @@ const Clientsdata = () => {
 
    const handleRowClick = (e) => {
        clCtx.conditionTruer();
-    history.push({pathname: `/EditClient/${e.data.id}`,state: { detail: e.data.id }});
+       console.log(e)
+    // history.push({pathname: `/EditClient/${e.data.id}`,state: { detail: e.data.id }});
   };
    return (
 

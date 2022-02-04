@@ -69,8 +69,10 @@ const ClientForm = (props) => {
         .then((res) => {
             const allOperators = res.data.payload.all_operators.map((ao) => ao.name );
             setOperators(allOperators);
+            const operatorId = res.data.payload.all_operators.find((ao) => ao.name === operator);
+            props.setOperator(operatorId.id);
         })
-    }, [])
+    }, [operator]);
 
     return (
         <div>
