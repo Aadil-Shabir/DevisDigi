@@ -173,7 +173,7 @@ const Campaign = () => {
     }, [])
 
     const rowClickHandler = (e) => {
-        console.log(e)
+        console.log(e);
         history.push({
             pathname: `/campaign/EditCampaign/${e.data.id}`,
             state: { detail: e.data.id },

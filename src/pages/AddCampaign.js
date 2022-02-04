@@ -52,7 +52,7 @@ const AddCampaign = () => {
         try {
             axios
                 .post(
-                    'https://dev.digitalizehub.com/api/admin/operators',
+                    'https://dev.digitalizehub.com/api/admin/operator',
                     {
                         operator_id: '25',
                         name: nameValue,

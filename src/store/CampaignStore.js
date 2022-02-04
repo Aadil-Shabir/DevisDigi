@@ -65,7 +65,7 @@ export const CampaignContextProvider = (props) => {
             openModalWithData: openModalWithDataHandler,
             value: value,
             validator: validator,
-            FWD: formWithData
+            FWD: formWithData,
         }}>
             {props.children}
         </CampaignContext.Provider>

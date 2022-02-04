@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import axios from 'axios'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 
 import { Scrollbars } from 'react-custom-scrollbars'
 
@@ -163,6 +163,7 @@ const useStyles = makeStyles((theme) => ({
 const EditCampaign = () => {
     const campaignId = useParams()
     const classes = useStyles()
+    const history = useHistory()
     const [cData, setCData] = useState({
         company: '',
         conversion: '',
@@ -171,6 +172,8 @@ const EditCampaign = () => {
         payout: '',
         public_id: '',
     })
+    const [payoutValue, setPayoutValue] = useState(0);
+    const [conversionValue, setConversionValue] = useState(0)
 
     useEffect(() => {
         axios
@@ -183,7 +186,44 @@ const EditCampaign = () => {
             })
     }, [])
 
-    console.log(cData)
+    const updateHandler = () => {
+        console.log({id: campaignId.campaignid, payout: payoutValue, conversion: conversionValue})
+    }
+
+        
+
+    const submitHandler = (e) => {
+        e.preventDefault();        
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        const formdata = new FormData()
+        formdata.append('campaign_id', campaignId.campaignid)
+        formdata.append('payout', payoutValue)
+        formdata.append('conversion', conversionValue)
+
+        try {
+            axios.post("https://dev.digitalizehub.com/api/admin/campaign",
+            formdata,
+            config
+            ).then((res) => {
+                console.log(res)
+            })
+
+
+        } catch (err) {
+            console.log(err)
+        }
+
+        history.push({
+            pathname: "/campaign"
+        })
+    };
+    
 
     return (
         <div className="clientbg">
@@ -205,7 +245,6 @@ const EditCampaign = () => {
                 </div>
 
                 <div class="col-10" style={{ padding: '0rem' }}>
-                    {/* <div classNAme={classes.scrollOpts}> */}
                     <Scrollbars style={{ width: '1300px', height: '800px' }}>
                         <div className={classes.campaignDiv}>
                             <p className={classes.campaignLink}>
@@ -290,22 +329,6 @@ const EditCampaign = () => {
                                 </p>
                             </div>
 
-                            {/* <p className={classes.OCPCHeaders}>
-              Operator
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-              Company
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-              Payout
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-              Conversion
-            </p>
-
-            <p className={classes.OCPCValues}>
-              Random &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Random
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 1
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 1.1
-            </p> */}
-
                             <div
                                 style={{
                                     display: 'flex',
@@ -322,6 +345,7 @@ const EditCampaign = () => {
                                     marginBottom: '2rem',
                                 }}
                             >
+                                <form onSubmit={submitHandler}>
                                 <div className={classes.inputHolder}>
                                     <div className={classes.spacing}>
                                         <label
@@ -331,10 +355,12 @@ const EditCampaign = () => {
                                             Payout
                                         </label>
                                         <input
-                                            type="email"
+                                            type="text"
                                             className="form-control"
                                             id="inputEmail4"
                                             placeholder=""
+                                            onChange={(e) => setPayoutValue(e.target.value)}
+                                            value={payoutValue}
                                         />
                                     </div>
                                     <div className={classes.spacing}>
@@ -345,22 +371,26 @@ const EditCampaign = () => {
                                             Conversion
                                         </label>
                                         <input
-                                            type="email"
+                                            type="text"
                                             className="form-control"
                                             id="inputEmail4"
                                             placeholder=""
+                                            onChange={(e) => setConversionValue(e.target.value)}
+                                            value={conversionValue}
                                         />
                                     </div>
                                     <div className={classes.spacing}>
                                         <br></br>
                                         <button
-                                            type="button"
+                                            type="submit"
                                             class="btn btn-success"
+                                            onClick={updateHandler}
                                         >
                                             &nbsp;Update
                                         </button>
                                     </div>
                                 </div>
+                                </form>
                                 <br></br>
                                 <div>
                                     <div>
@@ -397,7 +427,6 @@ const EditCampaign = () => {
                             </div>
                         </div>
                     </Scrollbars>
-                    {/* </div> */}
                 </div>
             </div>
         </div>
