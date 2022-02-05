@@ -95,7 +95,7 @@ const ClientForm = (props) => {
                                             className="form-control"
                                             id="inputEmail4"
                                             placeholder=""
-                                            onChange={(e) => props.setData({...sdata, subscription_key: e.target.value })}
+                                            onChange={(e) => props.setData({...sdata, subscriptionkey: e.target.value })}
                                             defaultValue={
                                                 sdata.subscription_key
                                             }
@@ -183,7 +183,7 @@ const ClientForm = (props) => {
                                         className="form-control"
                                         id="inputEmail4"
                                         placeholder=""
-                                        onChange={(e) => props.setData({...sdata, subscription_key: e.target.value})}
+                                        onChange={(e) => props.setData({...sdata, subscriptionkey: e.target.value})}
                                         defaultValue={
                                             sdata.subscription_key
                                         }
@@ -225,13 +225,13 @@ const ClientForm = (props) => {
                                             Billing Short codeder
                                         </label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             id="inputPassword4"
                                             placeholder=""
-                                            onChange={(e) => props.setData({...sdata, billing_short_code: e.target.value})}
+                                            onChange={(e) => props.setData({...sdata, billingSC: e.target.value})}
                                             defaultValue={
-                                                sdata.billing_short_code
+                                                sdata.billingSC
                                             }
                                         />
                                     </div>
@@ -242,13 +242,13 @@ const ClientForm = (props) => {
                                             Grace days
                                         </label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             id="inputPassword4"
                                             placeholder=""
-                                            onChange={(e) => props.setData({...sdata, grace_days: e.target.value})}
+                                            onChange={(e) => props.setData({...sdata, gracedays: e.target.value})}
                                             defaultValue={
-                                                sdata.grace_days
+                                                sdata.gracedays
                                             }
                                         />
                                     </div>
@@ -312,7 +312,7 @@ const ClientForm = (props) => {
                                             className="form-control"
                                             id="inputPassword4"
                                             placeholder=""
-                                            onChange={(e) => props.setData({...sdata, pin_flow: e.target.value})}
+                                            onChange={(e) => props.setData({...sdata, pinflow: e.target.value})}
                                             defaultValue={sdata.pin_flow}
                                         />
                                     </div>

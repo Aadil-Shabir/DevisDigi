@@ -115,10 +115,23 @@ const EditClient = () => {
             },
         }
 
+        const formdata = new FormData()
+        formdata.append('operator_id', operator)
+        formdata.append('provider_id', '3')
+        formdata.append('weblink', sdata.weblink)
+        formdata.append('subscriptionkey', sdata.subscriptionkey)
+        formdata.append('short_code', sdata.short_code)
+        formdata.append('gracedays', sdata.gracedays)
+        formdata.append('pinflow', sdata.pinflow)
+        formdata.append('billingSC', sdata.billingSC)
+        formdata.append('provider_redirect_url', sdata.provider_redirect_url)
+        formdata.append('service_code_campaign', sdata.service_code_campaign)
+        formdata.append('service_code', sdata.service_code)
+
         try {
             const res = axios.post(
                 'https://dev.digitalizehub.com/api/admin/client',
-                sdata,
+                formdata,
                 config
             )
             alert('Sucess')

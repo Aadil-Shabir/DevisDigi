@@ -163,7 +163,7 @@ const AddClient = () => {
         formdata.append('gracedays', sdata.gracedays)
         formdata.append('pinflow', sdata.pinflow)
         formdata.append('billingSC', sdata.billingSC)
-        formdata.append('provider_redirect_url', sdata.provider_id)
+        formdata.append('provider_redirect_url', sdata.provider_redirect_url)
         formdata.append('service_code_campaign', sdata.service_code_campaign)
         formdata.append('service_code', sdata.service_code)
 
@@ -179,8 +179,6 @@ const AddClient = () => {
             console.log(error)
         }
     }
-
-    console.log(operator)
 
     return (
         <div className="clientbg">

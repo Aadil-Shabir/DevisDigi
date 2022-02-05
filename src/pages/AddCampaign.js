@@ -1,22 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { makeStyles } from '@mui/styles'
-
 import CampaignContext from '../store/CampaignStore'
 
-const useStyles = makeStyles((theme) => ({
-    btnholder: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginLeft: '1rem',
-        marginTop: '1rem',
-        [theme.breakpoints.down('sm')]: {
-            justifyContent: 'center',
-            marginRight: '4rem',
-        },
-    },
-}))
+import { useStyles } from '../styles/campaign/addCampaign'
 
 const AddCampaign = () => {
     const classes = useStyles()
@@ -126,8 +113,6 @@ const AddCampaign = () => {
                     </label>
                 </div>
 
-                {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
-
                 <div
                     className="form-group col-md-6"
                     style={{ display: 'flex', flexDirection: 'row' }}
@@ -166,8 +151,6 @@ const AddCampaign = () => {
                     </label>
                 </div>
 
-                {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
-
                 <div
                     className="form-group col-md-6"
                     style={{ display: 'flex', flexDirection: 'row' }}
@@ -205,8 +188,6 @@ const AddCampaign = () => {
                         Country
                     </label>
                 </div>
-
-                {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div
                     className="form-group col-md-6"
@@ -250,8 +231,6 @@ const AddCampaign = () => {
                         Image
                     </label>
                 </div>
-
-                {/* <div className="form-group col-md-2" style ={{display:"flex",flexDirection:"row"}}></div> */}
 
                 <div
                     className="form-group col-md-6"

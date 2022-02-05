@@ -1,9 +1,10 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { makeStyles } from '@mui/styles'
 import { Link } from 'react-router-dom'
 
 import ClientContext from '../store/ClientStore'
 import Clientsdata from '../pages/Clientsdata'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     clientBox: {
@@ -80,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
 const Client = () => {
     const classes = useStyles();
     const clCtx = useContext(ClientContext);
+
+    useEffect(() => {
+        axios.get("https://dev.digitalizehub.com/api/admin/clients")
+        .then((res) => console.log(res.data))
+    }, [])
 
     return (
         <div className="clientbg">
