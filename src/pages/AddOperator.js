@@ -1,22 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { makeStyles } from '@mui/styles'
+import { useStyles } from '../styles/operators/addOperator';
 
 import OperatorContext from '../store/OperatorStore'
-
-const useStyles = makeStyles((theme) => ({
-    btnholder: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginLeft: '1rem',
-        marginTop: '1rem',
-        [theme.breakpoints.down('sm')]: {
-            justifyContent: 'center',
-            marginRight: '4rem',
-        },
-    },
-}))
 
 const AddOperator = (props) => {
     const classes = useStyles()

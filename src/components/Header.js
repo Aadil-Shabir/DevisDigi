@@ -14,8 +14,6 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            {/* <nav class="navbar navbar-expand-lg navbar-custom">
-                <div class="navbar-nav"> */}
 
                             <NavLink
                                 className="navbar-brand nav-item nav-link"
@@ -62,8 +60,6 @@ const Header = () => {
                             >
                                 Transaction
                             </NavLink>
-                            {/* </div>
-            </nav> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
