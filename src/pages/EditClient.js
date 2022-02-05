@@ -75,6 +75,7 @@ const EditClient = () => {
     const [operator_id, setOperator_id] = useState(0)
     const [provider_id, setProvider_id] = useState(0)
     const [operator, setOperator] = useState('')
+    const [graceDays, setGraceDays] = useState('');
 
     const clientid = useParams()
     const [sdata, setdata] = useState({
@@ -116,14 +117,15 @@ const EditClient = () => {
         }
 
         const formdata = new FormData()
-        formdata.append('operator_id', operator)
+        formdata.append('client_id', clientid.clientid)
+        formdata.append('operator_id', operator_id)
         formdata.append('provider_id', '3')
         formdata.append('weblink', sdata.weblink)
         formdata.append('subscriptionkey', sdata.subscriptionkey)
         formdata.append('short_code', sdata.short_code)
         formdata.append('gracedays', sdata.gracedays)
-        formdata.append('pinflow', sdata.pinflow)
-        formdata.append('billingSC', sdata.billingSC)
+        // formdata.append('pinflow', sdata.pinflow)
+        // formdata.append('billingSC', sdata.billingSC)
         formdata.append('provider_redirect_url', sdata.provider_redirect_url)
         formdata.append('service_code_campaign', sdata.service_code_campaign)
         formdata.append('service_code', sdata.service_code)
@@ -165,6 +167,8 @@ const EditClient = () => {
                     setOperator_id(res.data.payload.client.fields.operator)
                     setProvider_id(res.data.payload.client.fields.provider)
                     console.log(res.data.payload.client.fields.provider)
+                    // setdata({...sdata, gracedays: res.data.payload.client.fields.grace_days})
+                    setGraceDays(res.data.payload.client.fields.grace_days)
                     setL(false)
                 })
         } catch (error) {
@@ -180,7 +184,6 @@ const EditClient = () => {
                     (ao) => ao.id === operator_id
                 )
                 setOperator(operatorName.name)
-                console.log(provider_id)
             })
     }, [operator_id, provider_id])
 
@@ -305,6 +308,8 @@ const EditClient = () => {
                                         setData={setdata}
                                         setPackageData={setPackageData}
                                         setOperator={setOperator}
+                                        graceDays={graceDays}
+                                        setOperator_id={setOperator_id}
                                     />
                                 </div>
                             </div>

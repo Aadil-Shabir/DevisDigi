@@ -70,7 +70,8 @@ const ClientForm = (props) => {
             const allOperators = res.data.payload.all_operators.map((ao) => ao.name );
             setOperators(allOperators);
             const operatorId = res.data.payload.all_operators.find((ao) => ao.name === operator);
-            props.setOperator(operatorId.id);
+            props.setOperator_id(operatorId.id);
+            props.setData({...sdata, gracedays: props.graceDays})
         })
     }, [operator]);
 
@@ -88,7 +89,7 @@ const ClientForm = (props) => {
                                 <div className={classes.formContentSqeezer}>
                                     <div className="form-group col-md-5">
                                         <label htmlFor="inputEmail4">
-                                            Subscription key{' '}
+                                            Subscription key
                                         </label>
                                         <input
                                             type="email"
@@ -167,7 +168,7 @@ const ClientForm = (props) => {
                                 Configuration
                             </p>
 
-                            <div
+                            {/* <div
                                 className="form-row"
                                 style={{
                                     display: 'flex',
@@ -189,7 +190,7 @@ const ClientForm = (props) => {
                                         }
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <br></br>
                             <div
@@ -313,7 +314,7 @@ const ClientForm = (props) => {
                                             id="inputPassword4"
                                             placeholder=""
                                             onChange={(e) => props.setData({...sdata, pinflow: e.target.value})}
-                                            defaultValue={sdata.pin_flow}
+                                            defaultValue={sdata.pinflow}
                                         />
                                     </div>
                                 </div>

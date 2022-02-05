@@ -102,21 +102,9 @@ const useStyles = makeStyles((theme) => ({
 const AddClient = () => {
     const classes = useStyles()
     const [operator, setOperator] = useState('')
-    const [req, setReq] = useState({
-        operator_id: '',
-        provider_id: '',
-        weblink: '',
-        subscriptionkey: '',
-        short_code: '',
-        gracedays: '',
-        pinflow: '',
-        billingSC: '',
-        provider_redirect_url: '',
-        package_id: '',
-        service_code_campaign: '',
-        service_code: '',
-        client_id: '26',
-    })
+    const [operator_id, setOperator_id] = useState('')
+    const graceDays = ""
+
     const [packageData, setPackageData] = useState({
         id: '',
         name: '',
@@ -140,11 +128,6 @@ const AddClient = () => {
         client_id: '26',
     })
 
-    const handleChange = (e) => {
-        setReq({ ...req, [e.target.name]: e.target.value })
-        console.log(req)
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -155,7 +138,7 @@ const AddClient = () => {
         }
 
         const formdata = new FormData()
-        formdata.append('operator_id', operator)
+        formdata.append('operator_id', operator_id)
         formdata.append('provider_id', '3')
         formdata.append('weblink', sdata.weblink)
         formdata.append('subscriptionkey', sdata.subscriptionkey)
@@ -261,6 +244,8 @@ const AddClient = () => {
                                 setData={setdata}
                                 setPackageData={setPackageData}
                                 setOperator={setOperator}
+                                graceDays={graceDays}
+                                setOperator_id={setOperator_id}
                             />
                         </div>
                     </div>
