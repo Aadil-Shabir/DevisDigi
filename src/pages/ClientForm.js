@@ -269,6 +269,54 @@ const ClientForm = (props) => {
                                     </div>
                                 </div>
                             </div>
+
+                            <br></br>
+
+                            <div
+                                className="form-row"
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                }}
+                            >
+                                <div
+                                    className={classes.formContentSqeezer}
+                                    style={{ width: '50vw' }}
+                                >
+                                    <div className="form-group col-md-5">
+                                        <label htmlFor="inputEmail4">
+                                            Portal URL
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="inputEmail4"
+                                            placeholder=""
+                                            onChange={(e) => props.setData({...sdata, provider_redirect_url: e.target.value})}
+                                            defaultValue={
+                                                sdata.provider_redirect_url
+                                            }
+                                        />
+                                    </div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <div className="form-group col-md-5">
+                                        <label htmlFor="inputEmail4">
+                                            Weblink
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="inputEmail4"
+                                            placeholder=""
+                                            onChange={(e) => props.setData({...sdata, weblink: e.target.value})}
+                                            defaultValue={
+                                                sdata.weblink
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="col-3" style={{ marginLeft: '0rem' }}>

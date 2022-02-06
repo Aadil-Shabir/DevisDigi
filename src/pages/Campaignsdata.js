@@ -19,13 +19,13 @@ const Campaignsdata = () => {
            .then(rowData => setRowData(rowData))
    }, [camCtx.closeModal]);
 
-  const onButtonClick = e => {
-      const selectedNodes = gridRef.current.api.getSelectedNodes()
-      const selectedData = selectedNodes.map( node => node.data )
-      const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
+//   const onButtonClick = e => {
+//       const selectedNodes = gridRef.current.api.getSelectedNodes()
+//       const selectedData = selectedNodes.map( node => node.data )
+//       const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
 
-      alert(`Selected nodes: ${selectedDataStringPresentation}`)
-  }
+//       alert(`Selected nodes: ${selectedDataStringPresentation}`)
+//   }
 
    return (
        <div className="ag-theme-alpine" style={{height: 300, width: 900}}>
