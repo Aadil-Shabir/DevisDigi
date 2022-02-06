@@ -346,7 +346,7 @@ const AddOperator = (props) => {
                                 class="btn btn-success"
                                 onClick={createOperator}
                             >
-                                &nbsp;Create
+                                &nbsp;{opCtx.validator ? 'Update' : 'Create'}
                             </button>
                         </div>
                     </div>
