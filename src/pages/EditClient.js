@@ -113,6 +113,8 @@ const EditClient = () => {
         }
     }, [])
 
+    console.log(sdata)
+
     useEffect(() => {
         axios
             .get('https://dev.digitalizehub.com/api/admin/operators')

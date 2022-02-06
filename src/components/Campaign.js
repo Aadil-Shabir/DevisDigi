@@ -17,8 +17,6 @@ const Campaign = () => {
     const classes = useStyles()
     const history = useHistory()
     const camCtx = useContext(CampaignContext)
-
-    const [overlay, setOverlay] = useState(false)
     const [rowData, setRowData] = useState([])
     const [gridOptions, setGridOptions] = useState()
     const gridRef = useRef(null)
@@ -181,7 +179,7 @@ const Campaign = () => {
             {camCtx.overlay ? (
                 <div className="overlay modal-container">
                     <div className="overlay-sidebar">
-                        <AddCampaign></AddCampaign>
+                        <AddCampaign setRowData={setRowData}></AddCampaign>
                     </div>
                 </div>
             ) : (

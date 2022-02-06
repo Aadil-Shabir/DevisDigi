@@ -5,29 +5,19 @@ import CampaignContext from '../store/CampaignStore'
 
 import { useStyles } from '../styles/campaign/addCampaign'
 
-const AddCampaign = () => {
+const AddCampaign = ({setRowData}) => {
     const classes = useStyles()
 
-    const [countries, setCountries] = useState([])
-    const [nameValue, setNameValue] = useState('')
-    const [codeValue, setCodeValue] = useState('')
-    const [countryValue, setCountryValue] = useState('')
-    const [imageValue, setImageValue] = useState('')
+    const [allOperators, setAllOperators] = useState([]);
+    const [allAffiliates, setAllAffiliates] = useState([]);
+    const [payoutValue, setPayoutValue] = useState('');
+    const [conversionValue, setConversionValue] = useState('');
+    const [operatorValue, setOperatorValue] = useState('');
+    const [operatorId, setOperatorId] = useState();
+    const [affiliateValue, setaffiliateValue] = useState('');
+    const [affiliateId, setAffiliateId] = useState('');
 
     const camCtx = useContext(CampaignContext)
-
-    useEffect(() => {
-        setNameValue(camCtx.value.name)
-        setCodeValue(camCtx.value.code)
-        setCountryValue(camCtx.value.country)
-        setImageValue(camCtx.value.image)
-    }, [
-        camCtx.value.name,
-        camCtx.value.code,
-        camCtx.value.country,
-        camCtx.value.image,
-        camCtx.validator,
-    ])
 
     const createCampaign = () => {
         const config = {
@@ -36,16 +26,17 @@ const AddCampaign = () => {
             },
         }
 
+        const formdata = new FormData();
+        formdata.append('payout', payoutValue)
+        formdata.append('conversion', conversionValue)
+        formdata.append('operator_id', operatorId)
+        formdata.append('affiliate_id', affiliateId)
+
         try {
             axios
                 .post(
-                    'https://dev.digitalizehub.com/api/admin/operator',
-                    {
-                        operator_id: '25',
-                        name: nameValue,
-                        code: codeValue,
-                        country_id: countryValue,
-                    },
+                    'https://dev.digitalizehub.com/api/admin/campaign',
+                    formdata,
                     config
                 )
                 .then((response) => {
@@ -56,15 +47,39 @@ const AddCampaign = () => {
         }
 
         camCtx.closeModal();
+
+        setRowData((prev) => prev.concat([
+            {
+                id: prev.length,
+                operator: operatorValue,
+                company: affiliateValue,
+                payout: payoutValue,
+                conversion: conversionValue
+            }
+        ]))
     }
 
     useEffect(() => {
-        axios.get("https://dev.digitalizehub.com/api/admin/operators")
+        axios.get("https://dev.digitalizehub.com/api/admin/campaigns/1")
         .then((res) => {
-            const all_countries = res.data.payload.all_operators.map((c) => c.country);
-            setCountries(all_countries)
+            const all_operators = res.data.payload.all_operators.map((ao) => ao)
+            setAllOperators(all_operators)
+            const all_affiliates = res.data.payload.all_affiliates.map((af) => af)
+            setAllAffiliates(all_affiliates)
         })
     }, [])
+
+    const opChangeHandler = (e) => {
+        setOperatorValue(e.target.value);
+        const aoId = allOperators.find((ao) => ao.name === e.target.value);
+        setOperatorId(aoId.id)
+    }
+
+    const afChangeHandler = (e) => {
+        setaffiliateValue(e.target.value)
+        const afId = allAffiliates.find((af) => af.name === e.target.value)
+        setAffiliateId(afId.id)
+    }
 
     return (
         <div className="row">
@@ -109,7 +124,7 @@ const AddCampaign = () => {
                     }}
                 >
                     <label style={{ marginTop: '0.5rem', color: '#1E75B7' }}>
-                        Name
+                        Payout
                     </label>
                 </div>
 
@@ -118,12 +133,13 @@ const AddCampaign = () => {
                     style={{ display: 'flex', flexDirection: 'row' }}
                 >
                     <input
-                        type="text"
+                        type="number"
+                        step="0.01"
                         className="form-control"
                         id="inputEmail4"
                         placeholder=""
-                        onChange={(e) => setNameValue(e.target.value)}
-                        value={nameValue}
+                        onChange={(e) => setPayoutValue(e.target.value)}
+                        value={payoutValue}
                     />
                 </div>
             </div>
@@ -147,7 +163,7 @@ const AddCampaign = () => {
                     }}
                 >
                     <label style={{ marginTop: '0.5rem', color: '#1E75B7' }}>
-                        Code
+                        Conversion
                     </label>
                 </div>
 
@@ -156,12 +172,12 @@ const AddCampaign = () => {
                     style={{ display: 'flex', flexDirection: 'row' }}
                 >
                     <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         id="inputEmail4"
                         placeholder=""
-                        onChange={(e) => setCodeValue(e.target.value)}
-                        value={codeValue}
+                        onChange={(e) => setConversionValue(e.target.value)}
+                        value={conversionValue}
                     />
                 </div>
             </div>
@@ -185,7 +201,7 @@ const AddCampaign = () => {
                     }}
                 >
                     <label style={{ marginTop: '0.5rem', color: '#1E75B7' }}>
-                        Country
+                        Operator
                     </label>
                 </div>
 
@@ -193,19 +209,12 @@ const AddCampaign = () => {
                     className="form-group col-md-6"
                     style={{ display: 'flex', flexDirection: 'row' }}
                 >
-                    {camCtx.FWD ? (
-                        <select class="form-control" value={countryValue} onChange={(e) =>  setCountryValue(e.target.value)}>
-                            <option>
-                                {countryValue}
-                            </option>
-                            {countries.map((c) => <option key={Math.random()}>{c}</option>)}
-                        </select>
-                    ) : 
-                        <select class="form-control" value={countryValue || ""} onChange={(e) =>  setCountryValue(e.target.value)}>
+                    
+                        <select class="form-control" value={operatorValue || ""} onChange={opChangeHandler}>
                             <option>Choose..</option>
-                            {countries.map((c) => <option key={Math.random()}>{c}</option>)}
+                            {allOperators.map((c) => <option key={Math.random()}>{c.name}</option>)}
                         </select>
-                        }
+                        
                 </div>
             </div>
 
@@ -228,7 +237,7 @@ const AddCampaign = () => {
                     }}
                 >
                     <label style={{ marginTop: '0.5rem', color: '#1E75B7' }}>
-                        Image
+                        Affiliate
                     </label>
                 </div>
 
@@ -236,14 +245,10 @@ const AddCampaign = () => {
                     className="form-group col-md-6"
                     style={{ display: 'flex', flexDirection: 'row' }}
                 >
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputEmail4"
-                        placeholder=""
-                        onChange={(e) => setImageValue(e.target.value)}
-                        value={imageValue}
-                    />
+                    <select class="form-control" value={affiliateValue || ""} onChange={afChangeHandler}>
+                            <option>Choose..</option>
+                            {allAffiliates.map((c) => <option key={Math.random()}>{c.name}</option>)}
+                        </select>
                 </div>
             </div>
 

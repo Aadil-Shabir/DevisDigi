@@ -1,24 +1,23 @@
+import { useEffect, useState, useRef, useContext } from 'react';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
-import {
- 
-  Link
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 
- import { useEffect, useState, useRef } from 'react';
+import CampaignContext from '../store/CampaignStore';
 
 const Campaignsdata = () => {
-   const [rowData, setRowData] = useState([]);
-  const gridRef = useRef(null);
+    const [rowData, setRowData] = useState([]);
+    const camCtx = useContext(CampaignContext);
+    const gridRef = useRef(null);
 
    useEffect(() => {
        fetch('https://www.ag-grid.com/example-assets/row-data.json')
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
-   }, []);
+   }, [camCtx.closeModal]);
 
   const onButtonClick = e => {
       const selectedNodes = gridRef.current.api.getSelectedNodes()
