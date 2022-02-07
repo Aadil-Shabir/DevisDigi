@@ -140,12 +140,13 @@ const EditClient = () => {
                               price: res.data.payload.packages[0].price,
                               recurrence_days:
                                   res.data.payload.packages[0].recurrence_days,
-                              operator_id: operator_id,
+                              operator_id: res.data.payload.client.fields.operator,
+                              provider_id: res.data.payload.client.fields.provider,
                               client_id: res.data.payload.client.pk,
                           }
                         : res.data.payload.packages
                 )
-                // setPackageData({...packageData, operator_id: operator_id, client_id: res.data.payload.client.pk})
+                console.log(res.data.payload.client.pk)
             })
     }, [provider_id])
 
@@ -249,6 +250,7 @@ const EditClient = () => {
                                         setOperator={setOperator}
                                         graceDays={graceDays}
                                         setOperator_id={setOperator_id}
+                                        operator_id={operator_id}
                                     />
                                 </div>
                             </div>

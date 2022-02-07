@@ -13,6 +13,8 @@ const ClientForm = (props) => {
     const classes = useStyles();
     const clCtx = useContext(ClientContext);
     const [operators, setOperators] = useState([]);
+    const [client_id, setClient_id] = useState("");
+    const[targetOpId, setTargetOpId] = useState("");
 
     useEffect(() => {
         axios.get("http://dev.digitalizehub.com/api/admin/operators")
@@ -24,6 +26,75 @@ const ClientForm = (props) => {
             props.setData({...sdata, gracedays: props.graceDays})
         })
     }, [operator]);
+
+    // useEffect(() => {
+    //     axios.get("http://dev.digitalizehub.com/api/admin/clients")
+    //     .then((res) => {
+    //         const max_id = res.data.payload.clients.map((c) => c.id);
+    //         setClient_id(Math.max(...max_id));
+    //         const oper = res.data.payload.clients.find((c) => c.id === client_id);
+    //         setTargetOpId(oper.operator_id)
+    //     })
+    // }, [sdata])
+
+    const handleSubmit = () => {
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }
+
+        const formData = new FormData();
+        formData.append('client_id', packageData.client_id);
+        formData.append('operator_id', packageData.operator_id);
+        formData.append('provider_id', packageData.provider_id);
+        formData.append('price', packageData.price);
+        formData.append('name', packageData.name);
+        formData.append('reccurrence_days', packageData.recurrence_days);
+
+        try {
+            axios.post("http://dev.digitalizehub.com/api/admin/package",
+        formData,
+        config)
+        .then((res) => {
+            console.log(res)
+        })
+        }catch (err) {
+            console.log(err)
+        }
+        console.log({name: packageData.name, price: packageData.price, recurrence_days: packageData.recurrence_days,
+        client_id: packageData.client_id, provider_id: packageData.provider_id, operator_id: packageData.operator_id})
+    }
+
+    // const submitHandler = (e) => {
+    //     e.preventDefault();
+
+    //     const config = {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //         },
+    //     }
+
+    //     const formData = new FormData();
+    //     formData.append('client_id', client_id);
+    //     formData.append('operator_id', props.operator_id);
+    //     formData.append('provider_id', sdata.provider);
+    //     formData.append('price', packageData.price);
+    //     formData.append('name', packageData.name);
+    //     formData.append('recurrence_days', packageData.recurrence_days);
+
+    //     try {
+    //         axios.post("http://dev.digitalizehub.com/api/admin/package",
+    //     formData,
+    //     config)
+    //     .then((res) => {
+    //         console.log(res)
+    //     })
+    //     }catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     return (
         <div>
@@ -321,6 +392,7 @@ const ClientForm = (props) => {
 
                         <div className="col-3" style={{ marginLeft: '0rem' }}>
                             <p className={classes.formParagraph}> Package</p>
+                            {/* <form> */}
                             <div className={classes.widthIncreaser}>
                                 <div className="form-row">
                                     <div className="form-group col-md-12">
@@ -373,8 +445,18 @@ const ClientForm = (props) => {
                                             }
                                         />
                                     </div>
+                                    <div style={{margin: "2rem 0", marginLeft: "6rem"}}>
+                                    <button
+                                        type="button"
+                                        class="btn btn-success"
+                                        onClick={handleSubmit}
+                                    >
+                                        &nbsp;Create
+                                    </button>
+                                    </div>
                                 </div>
                             </div>
+                            {/* </form> */}
                         </div>
                     </div>
                 </Scrollbars>

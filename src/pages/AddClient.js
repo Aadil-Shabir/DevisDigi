@@ -153,6 +153,7 @@ const AddClient = () => {
                                 setOperator={setOperator}
                                 graceDays={graceDays}
                                 setOperator_id={setOperator_id}
+                                operator_id={operator_id}
                             />
                         </div>
                     </div>
