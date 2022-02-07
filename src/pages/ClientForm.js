@@ -9,12 +9,11 @@ const ClientForm = (props) => {
 
     const sdata = props.sdata;
     const packageData = props.packageData;
+    const setPackageData = props.setPackageData;
     const operator = props.operator;
     const classes = useStyles();
     const clCtx = useContext(ClientContext);
     const [operators, setOperators] = useState([]);
-    const [client_id, setClient_id] = useState("");
-    const[targetOpId, setTargetOpId] = useState("");
 
     useEffect(() => {
         axios.get("http://dev.digitalizehub.com/api/admin/operators")
@@ -27,15 +26,18 @@ const ClientForm = (props) => {
         })
     }, [operator]);
 
-    // useEffect(() => {
-    //     axios.get("http://dev.digitalizehub.com/api/admin/clients")
-    //     .then((res) => {
-    //         const max_id = res.data.payload.clients.map((c) => c.id);
-    //         setClient_id(Math.max(...max_id));
-    //         const oper = res.data.payload.clients.find((c) => c.id === client_id);
-    //         setTargetOpId(oper.operator_id)
-    //     })
-    // }, [sdata])
+    useEffect(() => {
+        axios.get(`http://dev.digitalizehub.com/api/admin/clients/${props.trgtOpId}`)
+        .then((res) => {
+            console.log(res)
+            setPackageData({
+                ...packageData,
+                client_id: props.trgtOpId,
+                provider_id: res.data.payload.client.fields.provider,
+                operator_id: res.data.payload.client.fields.operator
+            })
+        })
+    }, [props.trgtOpId])
 
     const handleSubmit = () => {
 
@@ -46,6 +48,7 @@ const ClientForm = (props) => {
         }
 
         const formData = new FormData();
+        clCtx.OPCSelectCondition && formData.append('package_id', packageData.package_id)
         formData.append('client_id', packageData.client_id);
         formData.append('operator_id', packageData.operator_id);
         formData.append('provider_id', packageData.provider_id);

@@ -10,6 +10,7 @@ const AddClient = () => {
     const classes = useStyles()
     const [operator, setOperator] = useState('')
     const [operator_id, setOperator_id] = useState('')
+    const [trgtOpId, setTrgtOpId] = useState('');
     const graceDays = ""
 
     const [packageData, setPackageData] = useState({
@@ -58,13 +59,15 @@ const AddClient = () => {
         formdata.append('service_code', sdata.service_code)
 
         try {
-            const res = axios.post(
+            axios.post(
                 'https://dev.digitalizehub.com/api/admin/client',
                 formdata,
                 config
-            )
-            alert('Sucess')
-            console.log(res)
+            ).then((res) => {
+                alert('Sucess')
+                console.log(res)
+                setTrgtOpId(res.data.payload.client)
+            })
         } catch (error) {
             console.log(error)
         }
@@ -154,6 +157,7 @@ const AddClient = () => {
                                 graceDays={graceDays}
                                 setOperator_id={setOperator_id}
                                 operator_id={operator_id}
+                                trgtOpId={trgtOpId}
                             />
                         </div>
                     </div>

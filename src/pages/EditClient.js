@@ -13,6 +13,7 @@ const EditClient = () => {
     const [provider_id, setProvider_id] = useState(0)
     const [operator, setOperator] = useState('')
     const [graceDays, setGraceDays] = useState('');
+    const trgtOpId = ''
 
     const clientid = useParams()
     const [sdata, setdata] = useState({
@@ -251,6 +252,7 @@ const EditClient = () => {
                                         graceDays={graceDays}
                                         setOperator_id={setOperator_id}
                                         operator_id={operator_id}
+                                        trgtOpId={trgtOpId}
                                     />
                                 </div>
                             </div>
