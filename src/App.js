@@ -7,7 +7,7 @@ import Client from './components/Client';
 import Operator from './components/Operator';
 import Campaign from './components/Campaign';
 import Subscription from './components/Subscription';
-import ClientForm from './pages/ClientForm';
+import SubscriptionDetail from './pages/SubscriptionDetail';
 import AddClient from './pages/AddClient';
 import EditClient from './pages/EditClient'
 import AddOperator from './pages/AddOperator'
@@ -49,6 +49,7 @@ function App() {
             <Route exact path="/operator" component={Operator} />
             <Route exact path="/campaign" component={Campaign} />
             <Route exact path="/Subscription" component={Subscription} />
+            <Route exact path="/Subscription/:id" component={SubscriptionDetail} />
             <Route exact path="/AddClient" component={AddClient} />
             <Route exact path="/NewClientForm" component={NewClientForm} />
             
