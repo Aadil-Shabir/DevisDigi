@@ -1,11 +1,39 @@
 import { useEffect, useState, useRef } from 'react';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
+import { makeStyles } from '@mui/styles';
+
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import axios from 'axios';
 
-const Subscriptiondata = () => {
+const useStyles = makeStyles((theme) => ({
+    gridContainer: {
+        width: 1220,
+        height: 360,
+        // marginTop: "2.5rem",
+        [theme.breakpoints.down('xxl')]: {
+          width: 1140
+        },
+        [theme.breakpoints.down('xl')]: {
+          width: 1100
+      },
+        [theme.breakpoints.down('lg')]: {
+            width: 750,
+            height: 300
+        },
+        [theme.breakpoints.down('md')]: {
+            width: 400
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: 450
+        },
+        
+    }
+}))
+
+const Subscriptiondata = ({value1, value2}) => {
+    const classes = useStyles();
     const [rowData, setRowData] = useState([]);
     const gridRef = useRef(null);
   const [gridOptions, setGridOptions] = useState();
@@ -55,24 +83,18 @@ const Subscriptiondata = () => {
       
       };
 
-//    useEffect(() => {
-//        fetch('https://www.ag-grid.com/example-assets/row-data.json')
-//            .then(result => result.json())
-//            .then(rowData => setRowData(rowData))
-//    }, []);
-
    useEffect(() => {
-
-       axios.get(`https://dev.digitalizehub.com/api/admin/subscribers?query[start]=2022-08-02T00:00:00.0000Z&query[end]=2022-08-02T23:18:54.0000Z`)
+       axios.get(`https://dev.digitalizehub.com/api/admin/subscribers?query[start]=${value1.toISOString()}&query[end]=${value2.toISOString()}`)
        .then((res) => setRowData(res.data.payload))
-   })
+   }, [value1, value2])
 
    const handleRowClick = () => {
 
    }
 
    return (
-       <div className="ag-theme-alpine" style={{height: 300, width: 900}}>
+       <div className="ag-theme-alpine">
+           <div className={classes.gridContainer}>
            <AgGridReact
               rowHeight={40}
               style={{ width: "100%", height: "100%;" }}
@@ -94,6 +116,7 @@ const Subscriptiondata = () => {
                <AgGridColumn field="model" sortable={true} filter={true}></AgGridColumn>
                <AgGridColumn field="price" sortable={true} filter={true}></AgGridColumn>
            </AgGridReact>
+           </div>
        </div>
   );
 };

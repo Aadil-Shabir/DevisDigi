@@ -1,6 +1,9 @@
+import React, {useState} from "react";
 import {makeStyles} from "@mui/styles";
 import { Link } from 'react-router-dom'
 import Subscriptiondata from '../pages/Subscriptiondata'
+import SubsCalendar1 from "../pages/calendar/Calendar1";
+import SubsCalendar2 from "../pages/calendar/Calendar2";
 
 const useStyles = makeStyles((theme) => ({
     nameHolder: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         padding: '0 2rem',
         paddingRight: '14rem',
-        marginBottom: '1rem'
+        // marginBottom: '1rem'
     },
     OCAIDisintegration: {
         display: 'flex',
@@ -61,14 +64,24 @@ const useStyles = makeStyles((theme) => ({
     dataContainer: {
         background: 'white',
         marginLeft: '2%',
-        height: '100vh',
+        marginTop: '1%',
         width: '96%',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: '0',
+    },
+    dateTimeHolder: {
+        display: 'flex',
+        flexDirection: 'row',
+        // margin: '0'
     }
 }))
 
 const Subscription = () => {
+    const [value, setValue] = useState(new Date());
+    const [value2, setValue2] = useState(new Date());
     const classes = useStyles();
 
     return (
@@ -115,8 +128,12 @@ const Subscription = () => {
                         </div>
                     </div>
                     <div className={classes.dataContainer}>
-                        <div style={{ marginLeft: '3%', marginTop: '2%' }}>
-                            <Subscriptiondata></Subscriptiondata>
+                        <div className={classes.dateTimeHolder}>
+                            <SubsCalendar1 value={value} setValue={setValue} />
+                            <SubsCalendar2 value={value2} setValue={setValue2} />
+                        </div>
+                        <div style={{margin: '0'}}>
+                            <Subscriptiondata value1={value} value2={value2}></Subscriptiondata>
                         </div>
                     </div>
                 </div>
