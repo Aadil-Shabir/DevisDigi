@@ -1,7 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
 import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router-dom';
+import SubscriptionContext from '../store/SubscriptionStore';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -34,9 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Subscriptiondata = ({value1, value2}) => {
     const classes = useStyles();
+    const subCtx = useContext(SubscriptionContext);
     const [rowData, setRowData] = useState([]);
     const gridRef = useRef(null);
-  const [gridOptions, setGridOptions] = useState();
+    const history = useHistory();
+    const [gridOptions, setGridOptions] = useState();
 
 
     const columnDefs = [
@@ -88,8 +92,9 @@ const Subscriptiondata = ({value1, value2}) => {
        .then((res) => setRowData(res.data.payload))
    }, [value1, value2])
 
-   const handleRowClick = () => {
-
+   const handleRowClick = (e) => {
+      subCtx.dataKeeper(e)
+      history.push({pathname: `/subscription/${e.data.id}`})
    }
 
    return (
