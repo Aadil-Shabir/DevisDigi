@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex', 
         flexDirection: 'row',
         alignItems: 'center',
-        // marginTop: '2rem'
     },
     text: {
         fontSize: '16px',

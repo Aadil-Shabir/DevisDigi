@@ -1,10 +1,8 @@
-import React, {useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {makeStyles} from "@mui/styles";
-import { Link } from 'react-router-dom'
-import Subscriptiondata from '../pages/Subscriptiondata'
-import SubsCalendar1 from "../pages/calendar/Calendar1";
-import SubsCalendar2 from "../pages/calendar/Calendar2";
-import { Scrollbars } from 'react-custom-scrollbars'
+import { Link, useParams } from 'react-router-dom';
+import SubscriptionContext from "../store/SubscriptionStore";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     nameHolder: {
@@ -117,10 +115,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const Subscription = () => {
-    const [value, setValue] = useState(new Date());
-    const [value2, setValue2] = useState(new Date());
+const SubscriptionDetail = () => {
+    const id = useParams();
     const classes = useStyles();
+    const subCtx = useContext(SubscriptionContext);
+    const [values, setValues] = useState({
+        operator: '',
+        company: '',
+        active: 0,
+        inActive: 0,
+    });
+
+    useEffect(() => {
+        axios.get(`https://dev.digitalizehub.com/api/admin/subscribers?query[start]=2020-08-02T00:00:00.0000Z&query[end]=2021-08-02T23:18:54.0000Z`)
+        .then((res) => {
+            const targetData = res.data.payload.find((td) => td.id.toString() === id.id);
+            setValues({
+                ...values,
+                operator: targetData.operator_name,
+                company: targetData.provider_name,
+                active: targetData.optin,
+                inActive: targetData.optout
+            })
+        })
+    }, [])
+
 
     return (
         <div className="clientbg">
@@ -152,8 +171,6 @@ const Subscription = () => {
                 </div>
 
                 <div class="col-10">
-                    {/* <div className={classes.scrollOpts}> */}
-                <Scrollbars style={{ width: '1300px', height: '800px' }}>
                     <div className={classes.nameHolder} >
                         <p className={classes.pText}>
                             DIGITAL_ABC_IQ
@@ -162,36 +179,26 @@ const Subscription = () => {
                     <div className={classes.keyValueHeader}>
                         <div className={classes.OCAIDisintegration}>
                             <p className={classes.OCAIHeaders}>Operator</p>
-                            <p className={classes.OCAIValues}>Nth_ZainIraq</p>
+                            <p className={classes.OCAIValues}>{values.operator}</p>
                         </div>
                         <div className={classes.OCAIDisintegration}>
                             <p className={classes.OCAIHeaders}>Company</p>
-                            <p className={classes.OCAIValues}>AdStart</p>
+                            <p className={classes.OCAIValues}>{values.company}</p>
                         </div>
                         <div className={classes.OCAIDisintegration}>
                             <p className={classes.OCAIHeaders}>Active</p>
-                            <p className={classes.OCAIValues}>6599</p>
+                            <p className={classes.OCAIValues}>{values.active}</p>
                         </div>
                         <div className={classes.OCAIDisintegration}>
                             <p className={classes.OCAIHeaders}>inActive</p>
-                            <p className={classes.OCAIValues}>324</p>
+                            <p className={classes.OCAIValues}>{values.inActive}</p>
                         </div>
                     </div>
-                    <div className={classes.dataContainer}>
-                        <div className={classes.dateTimeHolder}>
-                            <SubsCalendar1 value={value} setValue={setValue} />
-                            <SubsCalendar2 value={value2} setValue={setValue2} />
-                        </div>
-                        <div style={{margin: '0'}}>
-                            <Subscriptiondata value1={value} value2={value2}></Subscriptiondata>
-                        </div>
-                    </div>
-                </Scrollbars>
-                {/* </div> */}
+                    
                 </div>
             </div>
         </div>
     )
 }
 
-export default Subscription
+export default SubscriptionDetail;

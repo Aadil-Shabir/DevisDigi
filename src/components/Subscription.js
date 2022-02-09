@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
             width: '60vw',
             justifyContent: 'center',
             alignItems: 'center',
-            marginLeft: '5rem',
+            marginLeft: '4rem',
         },
     },
 }))
@@ -80,7 +80,7 @@ const Subscription = () => {
     return (
         <div className="clientbg">
             <div className="row">
-                <div class="col-2 minimizer" style={{ display: 'flex', padding: '0'}}>
+                <div class="col-2 minimizer" style={{ display: 'flex'}}>
                     <div class="vertical-nav bg-white" id="sidebar">
                         <ul class="nav flex-column bg-white mb-0">
                             <li class="nav-item sidebar">

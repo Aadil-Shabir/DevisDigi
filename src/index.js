@@ -6,13 +6,16 @@ import App from './App'
 import { OperatorContextProvider } from './store/OperatorStore'
 import { CampaignContextProvider } from './store/CampaignStore'
 import { ClientContextProvider } from './store/ClientStore'
+import { SubscriptionContextProvider } from './store/SubscriptionStore'
 
 ReactDOM.render(
     <ClientContextProvider>
         <CampaignContextProvider>
-            <OperatorContextProvider>
-                <App />
-            </OperatorContextProvider>
+            <SubscriptionContextProvider>
+                <OperatorContextProvider>
+                    <App />
+                </OperatorContextProvider>
+            </SubscriptionContextProvider>
         </CampaignContextProvider>
     </ClientContextProvider>,
     document.getElementById('root')
