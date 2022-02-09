@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
       },
         [theme.breakpoints.down('lg')]: {
             width: 750,
-            height: 300
+            height: 400
         },
         [theme.breakpoints.down('md')]: {
             width: 400

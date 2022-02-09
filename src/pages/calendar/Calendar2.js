@@ -13,8 +13,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '16px',
         fontWeight: 'bold',
         marginTop: '0.8rem',
-        marginRight: '0.5rem'
-    }
+        marginRight: '0.5rem',
+        [theme.breakpoints.down('md')]: {
+            marginRight: '1.8rem'
+        }
+    },
 }))
 const SubsCalendar2 = ({value, setValue}) => {
     const classes = useStyles();
